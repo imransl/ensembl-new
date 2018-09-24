@@ -43,7 +43,10 @@ const devConfig = {
   },
   watchOptions: {
     ignored: /node_modules/
-  }
+  },
+  node: {
+    fs: 'empty'
+   }
 };
 
 const commonConfig = require('./webpack.common')(true, moduleRules, plugins);
