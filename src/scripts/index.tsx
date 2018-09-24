@@ -8,6 +8,7 @@ import App from './components/App';
 import { registerSW } from './registerServiceWorker';
 
 import '../styles/main';
+import './browser/hellostdweb';
 
 render(
   <Provider store={store}>
