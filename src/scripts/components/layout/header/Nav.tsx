@@ -1,25 +1,36 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { toggleAccount, toggleLaunchbar } from '../../../actions/headerActions';
 
 import launchbarIcon from 'assets/img/header/launchbar.svg';
 import userIcon from 'assets/img/header/user.svg';
 
-type NavProps = {
+type StateProps = {};
+
+type DispatchProps = {
   toggleLaunchbar: () => void;
   toggleAccount: () => void;
 };
 
-class Nav extends PureComponent<NavProps> {
+type OwnProps = {};
+
+type NavProps = StateProps & DispatchProps & OwnProps;
+
+export class Nav extends PureComponent<NavProps> {
   public render() {
     return (
       <div className="top-bar-right">
-        <button className="inline" onClick={this.props.toggleLaunchbar}>
+        <button
+          className="inline launchbar-button"
+          onClick={this.props.toggleLaunchbar}
+        >
           <img src={launchbarIcon} alt="toggle launchbar" title="Launchbar" />
         </button>
-        <button className="inline" onClick={this.props.toggleAccount}>
+        <button
+          className="inline account-button"
+          onClick={this.props.toggleAccount}
+        >
           <img src={userIcon} alt="toggle account" title="Account" />
         </button>
       </div>
@@ -27,11 +38,14 @@ class Nav extends PureComponent<NavProps> {
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (): StateProps => ({});
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  toggleAccount: () => dispatch(toggleAccount()),
-  toggleLaunchbar: () => dispatch(toggleLaunchbar())
-});
+const mapDispatchToProps: DispatchProps = {
+  toggleAccount,
+  toggleLaunchbar
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);

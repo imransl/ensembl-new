@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from './store';
-import App from './components/App';
+import Root from './components/Root';
 
 import { registerSW } from './registerServiceWorker';
 
@@ -12,7 +12,7 @@ import './browser/hellostdweb';
 
 render(
   <Provider store={store}>
-    <App />
+    <Root />
   </Provider>,
   document.getElementById('ens-app')
 );

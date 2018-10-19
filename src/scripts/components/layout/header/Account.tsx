@@ -3,12 +3,17 @@ import SlideDown from 'react-slidedown';
 import { connect } from 'react-redux';
 
 import { RootState } from '../../../reducers';
+import { getAccountExpanded } from '../../../selectors/headerSelectors';
 
-type AccountProps = {
+type StateProps = {
   accountExpanded: boolean;
 };
 
-class Account extends Component<AccountProps> {
+type OwnProps = {};
+
+type AccountProps = StateProps & OwnProps;
+
+export class Account extends Component<AccountProps> {
   public render() {
     const AccountChildren: ReactNode = (
       <div className="account">
@@ -24,9 +29,8 @@ class Account extends Component<AccountProps> {
   }
 }
 
-const mapStateToProps = (state: RootState) => {
-  const { accountExpanded } = state.header;
-  return { accountExpanded };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  accountExpanded: getAccountExpanded(state)
+});
 
 export default connect(mapStateToProps)(Account);
