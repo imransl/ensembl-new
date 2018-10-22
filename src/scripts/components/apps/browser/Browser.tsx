@@ -18,11 +18,35 @@ type BrowserProps = RouteComponentProps<{}> & {
 };
 
 class Browser extends Component<BrowserProps> {
+  el: React.RefObject<HTMLDivElement>;
+
   constructor(props: BrowserProps) {
     super(props);
 
+    this.el = React.createRef();
     this.closeTrack = this.closeTrack.bind(this);
   }
+
+  public componentDidMount() {
+     console.log("cdm");
+     let moveEvent = new CustomEvent('bpane-start', {
+        bubbles: true,
+        detail: {}
+     });
+     console.log(this.el.current);
+     if(this.el.current) {
+        console.log('dispatch');
+        let body = this.el.current.ownerDocument.querySelector('body');
+        if(body) {
+            body.dispatchEvent(moveEvent);
+        }
+     }
+    
+  }
+
+  // componentWillUnmount() {
+  //   console.log("cwu");
+  // }
 
   public closeTrack() {
     if (this.props.drawerOpened === false) {
@@ -38,8 +62,8 @@ class Browser extends Component<BrowserProps> {
         <section className={`browser ${this.props.browserOpenState}`}>
           <BrowserBar expanded={false} drawerOpened={this.props.drawerOpened} />
           <div className="browser-canvas-wrapper" onClick={this.closeTrack}>
-            <div className="browser-canvas">
-              <h2>Species Browser Placeholder</h2>
+            <div className="browser-canvas" ref={this.el}>
+              <div id="stage"/>
             </div>
           </div>
         </section>

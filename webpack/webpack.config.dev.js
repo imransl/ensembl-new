@@ -50,7 +50,10 @@ const devConfig = {
   // this would reduce memory consumption and also should improve build times
   watchOptions: {
     ignored: /node_modules/
-  }
+  },
+  node: {
+    fs: 'empty'
+   }
 };
 
 // get the common config
